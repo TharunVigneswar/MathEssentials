@@ -1,14 +1,28 @@
 import libs as l
+import time
+import keyboard
+
+tx1 = """-------------------- Welcome To Math Essentials --------------------
+You can solve fundamental and some advanced mathematic problems here"""
+
+for char in tx1:
+    print(char, end="", flush=True)
+    time.sleep(0.025)
 
 
-print("""
--------------------- Welcome To Math Essentials --------------------
-You can solve fundamental and some advanced mathematic problems here
-""")
+print("")
+
+
 
 while True:
-    func = input("Enter which function you want to use: ").lower()
-    print("")
+    prompt = "Enter which function you want to use: "
+    print()
+    for char in prompt:
+        print(char, end="", flush=True)
+        time.sleep(0.025)
+
+    func = input().lower()
+    print()
     if func == "1" or func == "add":
         print("Addition")
         a = int(input("Enter number 1: "))
@@ -273,8 +287,47 @@ while True:
     elif func == "help":
         l.show_help()
     elif func == "stop":
-        print("Thank You for using Math Essentials!! Hoping to see you come back soon!!")
-        break
+        end = "Thank You for using Math Essentials!! Hoping to see you come back soon!!"
+        
+        for char in end:
+            if keyboard.is_pressed("esc"):
+                print("\nShutdown cancelled!")
+                break
+    
+            print(char, end="", flush=True)
+            time.sleep(0.025)
+    
+        else:
+            print("\n")
+    
+            cancelled = False
+            quit = "Press Esc to stop quitting." 
+            for i in quit:
+                print(i, end="", flush=True)
+                time.sleep(0.02)
+
+            print("\n")
+
+            for i in range(3, 0, -1):
+                print(f"Closing application in {i}")
+    
+                for _ in range(10):
+                    if keyboard.is_pressed("esc"):
+                        cancelled = True
+                        break
+                    time.sleep(0.12)
+    
+                if cancelled:
+                    break
+    
+            if cancelled:
+                tx = "Shutdown cancelled! Returning to Math Essentials..."
+                for i in tx:
+                    print(i, end="", flush=True)
+                    time.sleep(0.02)
+            else:
+                print("\nGoodbye!")
+                exit()
     else:
         print("Invalid Choice. Retry")
         print("")
